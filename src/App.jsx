@@ -7,8 +7,7 @@ const App = () => {
   let dispatch = useDispatch()
 
   let data = useSelector(state => state.userReducer.user) || []
-  let [view, setView] = useState("")
-  let Update="";
+  let [view, setView] = useState()
 
   console.log(view, "setView");
 
@@ -16,22 +15,21 @@ const App = () => {
     dispatch({ type: GET_USER_PENDING })
   }, [])
 
+
+
   const hendel_view_input = (e) => {
      setView({...view, [e.target.name]: e.target.value})
-     console.log(view, "setView");
   }
 
-  const hendel_update_input = (e) => {
-    Update = e.target.value
-  }
-  console.log(hello);
+  // const hendel_update_input = (e) => {
+  //   Update = e.target.value
+  // }
   const hendel_Delete_user = (val) => {
     dispatch({ type: DELETE_USER_PENDING, payload: val })
   }
 
   const hendelSubmit = (e) => {
     e.preventDefault()
-    console.log("submit called");
     dispatch({ type: UPDATE_USER_PENDING, payload: view })
   }
 
@@ -64,7 +62,7 @@ const App = () => {
               <form class="space-y-4" action="#" onSubmit={hendelSubmit}>
                 <div>
                   <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
-                  <input type="text" onChange={hendel_update_input} value={Update} name="name" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="" required />
+                  <input type="text" onChange={hendel_view_input} value={view?.name} name="name" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="" required />
                 </div>
 
                 <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
